@@ -1,3 +1,5 @@
+/* eslint-disable new-cap,func-names,prefer-arrow-callback */
+
 import { Given, When, Then } from 'cucumber';
 
 Given('I have the following tasks:', function (dataTable) {
