@@ -10,7 +10,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "cucumber-js --require-module babel-register",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "cucumber": "^4.2.1"
   }
 }
