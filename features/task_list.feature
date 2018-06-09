@@ -8,5 +8,6 @@ Feature: Task List
       | 1  | Build Airplane | Hammer nails into wood | 2,3,4         |             |
     When I visit Grouped Task List system
     Then I should see the following groups:
-      | Build Airplane |
-      | Purchases      |
+      | group              |
+      | Build Airplane (1) |
+      | Purchases (2)      |
