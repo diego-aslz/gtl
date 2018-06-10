@@ -1,23 +1,45 @@
 import React from 'react';
+import tasksRepository from '../repositories/tasks-repository';
 
-function Tasks(props) {
-  if (!props.group) {
-    return null;
+class Tasks extends React.Component {
+  taskClicked(task) {
+    tasksRepository.completeTask(task.id);
+    this.props.taskChanged();
   }
 
-  const taskItems = props.group.tasks.map(task => (
-    <li key={task.id} className="list-group-item task-item {task.completedAt ? 'locked' : null}">
-      <b>{task.task}</b>
-    </li>
-  ));
+  renderTasks(tasks) {
+    return tasks.map(task => (
+      <li key={task.id} className={this.taskItemClasses(task)}>
+        <a onClick={() => this.taskClicked(task)}><b>{task.task}</b></a>
+      </li>
+    ));
+  }
 
-  return (
-    <div>
-      <h2>{props.group.name}</h2>
-      <br />
-      <ul className="tasks-list list-group">{taskItems}</ul>
-    </div>
-  );
+  taskItemClasses(task) {
+    let classes = 'list-group-item task-item';
+
+    if (task.completedAt) {
+      classes += ' completed';
+    }
+
+    return classes;
+  }
+
+  render() {
+    const { group } = this.props;
+
+    if (!group) {
+      return null;
+    }
+
+    return (
+      <div>
+        <h2>{group.name}</h2>
+        <br />
+        <ul className="tasks-list list-group">{this.renderTasks(group.tasks)}</ul>
+      </div>
+    );
+  }
 }
 
 export default Tasks;

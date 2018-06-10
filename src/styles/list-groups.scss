@@ -9,4 +9,8 @@
       text-decoration: none;
     }
   }
+
+  + .list-group-item {
+    border-top: none;
+  }
 }

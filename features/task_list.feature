@@ -3,8 +3,8 @@ Feature: Task List
   Scenario: Listing task groups
     Given I have the following tasks:
       | id | group          | task                   | dependencyIds | completedAt          |
-      | 1  | Purchases      | Go to the bank         |               |                      |
-      | 2  | Purchases      | Buy hammer             | 1             | 2018-06-10 10:00:00Z |
+      | 1  | Purchases      | Go to the bank         |               | 2018-06-10 10:00:00Z |
+      | 2  | Purchases      | Buy hammer             | 1             |                      |
       | 3  | Build Airplane | Hammer nails into wood | 2,3,4         |                      |
     When I visit Grouped Task List system
     Then I should see the following groups:
@@ -18,8 +18,22 @@ Feature: Task List
       | 1  | Purchases      | Go to the bank         |               |             |
       | 2  | Purchases      | Buy hammer             | 1             |             |
       | 3  | Build Airplane | Hammer nails into wood | 2,3,4         |             |
+    And I visit Grouped Task List system
     When I expand group "Purchases"
     Then I should see the following tasks:
-      | task           |
-      | Go to the bank |
-      | Buy hammer     |
+      | task           | status     |
+      | Go to the bank | incomplete |
+      | Buy hammer     | incomplete |
+
+  Scenario: Completing a task
+    Given I have the following tasks:
+      | id | group     | task           | dependencyIds | completedAt |
+      | 1  | Purchases | Go to the bank |               |             |
+      | 2  | Purchases | Buy hammer     | 1             |             |
+    And I visit Grouped Task List system
+    And I expand group "Purchases"
+    When I mark task "Go to the bank" as completed
+    Then I should see the following tasks:
+      | task           | status     |
+      | Go to the bank | completed  |
+      | Buy hammer     | incomplete |

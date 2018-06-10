@@ -1,6 +1,6 @@
 /* eslint-disable new-cap,func-names,prefer-arrow-callback */
 
-import { Given, When, Then } from 'cucumber';
+import { Given, When, Then, Before } from 'cucumber';
 import tasksRepository from '../../src/repositories/tasks-repository';
 import App from '../../src/components/App';
 import React from 'react';
@@ -9,8 +9,15 @@ import { expect } from 'chai';
 
 let app;
 
+Before(function() {
+  tasksRepository.clear();
+});
+
 Given('I have the following tasks:', function (dataTable) {
-  tasksRepository.addTasks(dataTable.hashes());
+  tasksRepository.addTasks(dataTable.hashes().map(task => ({
+    ...task,
+    completedAt: (task.completedAt === '' ? null : new Date(task.completedAt)),
+  })));
 });
 
 When('I visit Grouped Task List system', function () {
@@ -18,7 +25,11 @@ When('I visit Grouped Task List system', function () {
 });
 
 When('I expand group {string}', function (name) {
-  app.find('.groups-list li a').filterWhere(el => el.type() && el.text().indexOf(name) > -1).simulate('click');
+  findItem('.groups-list', name).simulate('click');
+});
+
+When('I mark task {string} as completed', function (name) {
+  findItem('.tasks-list', name).simulate('click');
 });
 
 Then('I should see the following groups:', function (dataTable) {
@@ -30,7 +41,18 @@ Then('I should see the following groups:', function (dataTable) {
 });
 
 Then('I should see the following tasks:', function (dataTable) {
-  const actual = app.find('.task-item').map(el => el.text());
-  const expected = dataTable.rows().map(row => row[0]);
-  expect(actual).to.be.eql(expected);
+  function getStatus(el) {
+    return ['completed'].find(status => el.hasClass(status)) || 'incomplete';
+  }
+
+  const actual = app.find('.task-item').map(el => ({
+    task: el.text(),
+    status: getStatus(el),
+  }));
+
+  expect(actual).to.be.eql(dataTable.hashes());
 });
+
+function findItem(listSelector, name) {
+  return app.find(listSelector + ' li a').filterWhere(el => el.text().indexOf(name) > -1);
+}

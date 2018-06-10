@@ -6289,11 +6289,11 @@ a.text-dark:hover, a.text-dark:focus {
     color: #212529; }
     .list-group > .list-group-item a:hover {
       text-decoration: none; }
+  .list-group > .list-group-item + .list-group-item {
+    border-top: none; }
 
 .groups-list > li {
   background: url("../images/group-item.svg") no-repeat 8px center; }
-  .groups-list > li + li {
-    border-top: none; }
 
 .tasks-list > li {
   padding-top: 1.5rem;
@@ -6306,3 +6306,6 @@ a.text-dark:hover, a.text-dark:focus {
     background: url("../images/locked.svg") no-repeat 8px center;
     color: #adb5bd;
     cursor: not-allowed; }
+
+a {
+  cursor: pointer; }
