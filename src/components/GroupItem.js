@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TaskGroupItem extends React.Component {
+class GroupItem extends React.Component {
   onClick(ev) {
     ev.preventDefault();
     this.props.onClick(this.props.group);
@@ -21,4 +21,4 @@ class TaskGroupItem extends React.Component {
   }
 }
 
-export default TaskGroupItem;
+export default GroupItem;

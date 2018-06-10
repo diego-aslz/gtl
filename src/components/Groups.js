@@ -1,10 +1,10 @@
 import React from 'react';
-import TaskGroupItem from './TaskGroupItem';
-import '../styles/TaskGroups.css';
+import GroupItem from './GroupItem';
+import '../styles/Groups.css';
 
-function TaskGroups(props) {
+function Groups(props) {
   const groups = props.groups.map(group => (
-    <TaskGroupItem key={group.name} group={group} onClick={props.onGroupSelect} />
+    <GroupItem key={group.name} group={group} onClick={props.onGroupSelect} />
   ));
 
   return (
@@ -16,4 +16,4 @@ function TaskGroups(props) {
   );
 }
 
-export default TaskGroups;
+export default Groups;

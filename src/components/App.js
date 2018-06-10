@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskGroups from './TaskGroups';
+import Groups from './Groups';
 import Tasks from './Tasks';
 import tasksRepository from '../repositories/tasks-repository';
 
@@ -18,7 +18,7 @@ class App extends React.Component {
       <div className="container grouped-task-list-app">
         <div className="row">
           <div className="col-md-6">
-            <TaskGroups groups={tasksRepository.listGroups()} onGroupSelect={group => this.groupSelected(group)} />
+            <Groups groups={tasksRepository.listGroups()} onGroupSelect={group => this.groupSelected(group)} />
           </div>
           <div className="col-md-6">
             <Tasks group={this.state.group} />
