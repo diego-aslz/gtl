@@ -17,11 +17,18 @@ When('I visit Grouped Task List system', function () {
   app = mount(<App />);
 });
 
-Then('I should see the following groups:', function (dataTable) {
-  const taskList = app.find('.task-groups');
-  expect(taskList).to.have.length(1);
+When('I expand group {string}', function (name) {
+  app.find('.task-groups li a').filterWhere(el => el.type() && el.text().indexOf(name) > -1).simulate('click');
+});
 
-  const actual = taskList.children().map(el => el.text());
+Then('I should see the following groups:', function (dataTable) {
+  const actual = app.find('.task-groups').children().map(el => el.text());
+  const expected = dataTable.rows().map(row => row[0]);
+  expect(actual).to.be.eql(expected);
+});
+
+Then('I should see the following tasks:', function (dataTable) {
+  const actual = app.find('.task-item').map(el => el.text());
   const expected = dataTable.rows().map(row => row[0]);
   expect(actual).to.be.eql(expected);
 });

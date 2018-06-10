@@ -10,14 +10,20 @@ const tasksRepository = {
     return allTasks.slice();
   },
 
-  listGroupsWithTasksCount() {
-    return this.listTasks().map(task => task.group).sort().reduce((groups, name) => {
-      if (!groups[name]) {
-        groups[name] = 0;
+  listGroups() {
+    const groups = [];
+    this.listTasks().forEach(task => {
+      const group = groups.find(g => g.name === task.group);
+      if (group) {
+        group.tasks.push(task);
+      } else {
+        groups.push({
+          name: task.group,
+          tasks: [task],
+        });
       }
-      groups[name] += 1;
-      return groups;
-    }, {});
+    });
+    return groups.sort((g1, g2) => g1.name > g2.name);
   }
 };
 
