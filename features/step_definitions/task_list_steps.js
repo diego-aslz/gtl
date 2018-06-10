@@ -28,7 +28,7 @@ When('I expand group {string}', function (name) {
   findItem('.groups-list', name).simulate('click');
 });
 
-When('I mark task {string} as completed', function (name) {
+When('I mark task {string} as completed/incomplete', function (name) {
   findItem('.tasks-list', name).simulate('click');
 });
 

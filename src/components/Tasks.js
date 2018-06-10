@@ -3,7 +3,11 @@ import tasksRepository from '../repositories/tasks-repository';
 
 class Tasks extends React.Component {
   taskClicked(task) {
-    tasksRepository.completeTask(task.id);
+    if (task.completedAt) {
+      tasksRepository.incompleteTask(task.id);
+    } else {
+      tasksRepository.completeTask(task.id);
+    }
     this.props.taskChanged();
   }
 

@@ -34,9 +34,21 @@ const tasksRepository = {
   },
 
   completeTask(id) {
+    this.withTaskById(id, task => {
+      task.completedAt = new Date();
+    });
+  },
+
+  incompleteTask(id) {
+    this.withTaskById(id, task => {
+      task.completedAt = null;
+    });
+  },
+
+  withTaskById(id, callbackFn) {
     const task = allTasks.find(t => t.id === id);
     if (task) {
-      task.completedAt = new Date();
+      callbackFn(task);
     }
   }
 };
