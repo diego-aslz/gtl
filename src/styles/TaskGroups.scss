@@ -14,3 +14,8 @@ $list-group-border-radius: 0;
     }
   }
 }
+
+.tasks-list > .list-group-item {
+  padding-top: 2 * $list-group-item-padding-y;
+  padding-bottom: 2 * $list-group-item-padding-y;
+}

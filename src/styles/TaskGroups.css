@@ -6289,3 +6289,7 @@ a.text-dark:hover, a.text-dark:focus {
     color: #212529; }
     .list-group > .list-group-item a:hover {
       text-decoration: none; }
+
+.tasks-list > .list-group-item {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem; }
