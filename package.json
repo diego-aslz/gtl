@@ -15,8 +15,8 @@
     "test": "cucumber-js --require-module babel-register",
     "eject": "react-scripts eject",
     "lint": "eslint features src",
-    "build-css": "node-sass-chokidar --include-path ./node_modules src/ -o src/",
-    "watch-css": "yarn build-css && node-sass-chokidar --include-path ./node_modules src/ -o src/ --watch --recursive"
+    "build-css": "node-sass-chokidar --include-path ./node_modules --include-path ./src/styles src/styles/app.scss -o src/styles",
+    "watch-css": "yarn build-css && node-sass-chokidar --include-path ./node_modules src/styles/app.scss -o src/styles --watch --recursive"
   },
   "devDependencies": {
     "babel-plugin-css-modules-transform": "^1.6.1",

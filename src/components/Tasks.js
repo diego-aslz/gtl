@@ -6,7 +6,7 @@ function Tasks(props) {
   }
 
   const taskItems = props.group.tasks.map(task => (
-    <li key={task.id} className="list-group-item task-item">
+    <li key={task.id} className="list-group-item task-item {task.completedAt ? 'locked' : null}">
       <b>{task.task}</b>
     </li>
   ));

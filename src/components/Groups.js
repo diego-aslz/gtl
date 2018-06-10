@@ -1,6 +1,5 @@
 import React from 'react';
 import GroupItem from './GroupItem';
-import '../styles/Groups.css';
 
 function Groups(props) {
   const groups = props.groups.map(group => (
@@ -11,7 +10,7 @@ function Groups(props) {
     <div>
       <h2>Things to do</h2>
       <br />
-      <ul className="task-groups list-group">{groups}</ul>
+      <ul className="groups-list list-group">{groups}</ul>
     </div>
   );
 }

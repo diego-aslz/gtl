@@ -5,6 +5,8 @@ import registerServiceWorker from './registerServiceWorker';
 import tasksRepository from './repositories/tasks-repository';
 import sampleTasks from './repositories/sample-tasks';
 
+import './styles/app.css';
+
 // Static tasks for the exercise.
 tasksRepository.addTasks(sampleTasks);
 

@@ -18,11 +18,11 @@ When('I visit Grouped Task List system', function () {
 });
 
 When('I expand group {string}', function (name) {
-  app.find('.task-groups li a').filterWhere(el => el.type() && el.text().indexOf(name) > -1).simulate('click');
+  app.find('.groups-list li a').filterWhere(el => el.type() && el.text().indexOf(name) > -1).simulate('click');
 });
 
 Then('I should see the following groups:', function (dataTable) {
-  const actual = app.find('.task-groups li a').map(el => ({
+  const actual = app.find('.groups-list li a').map(el => ({
     group: el.children().first().text(),
     subtitle: el.children().last().text(),
   }));

@@ -1,0 +1,10 @@
+$list-group-item-padding-x: 3rem;
+$list-group-border-radius: 0;
+
+$text-muted: #adb5bd;
+
+@import "bootstrap/scss/bootstrap";
+
+@import "list-groups";
+@import "groups";
+@import "tasks";

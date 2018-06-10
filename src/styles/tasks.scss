@@ -1,0 +1,16 @@
+.tasks-list > li {
+  padding-top: 2 * $list-group-item-padding-y;
+  padding-bottom: 2 * $list-group-item-padding-y;
+  background: url('../images/incomplete.svg') no-repeat 8px center;
+
+  &.completed {
+    background: url('../images/completed.svg') no-repeat 8px center;
+    text-decoration: line-through;
+  }
+
+  &.locked {
+    background: url('../images/locked.svg') no-repeat 8px center;
+    color: $text-muted;
+    cursor: not-allowed;
+  }
+}

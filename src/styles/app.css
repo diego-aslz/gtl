@@ -183,7 +183,7 @@ table {
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  color: #6c757d;
+  color: #adb5bd;
   text-align: left;
   caption-side: bottom; }
 
@@ -1393,7 +1393,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   margin-top: 0.3rem;
   margin-left: -1.25rem; }
   .form-check-input:disabled ~ .form-check-label {
-    color: #6c757d; }
+    color: #adb5bd; }
 
 .form-check-label {
   margin-bottom: 0; }
@@ -3577,7 +3577,7 @@ input[type="button"].btn-block {
 .list-group-item {
   position: relative;
   display: block;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 3rem;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125); }
@@ -6203,7 +6203,7 @@ a.text-dark:hover, a.text-dark:focus {
   color: #212529 !important; }
 
 .text-muted {
-  color: #6c757d !important; }
+  color: #adb5bd !important; }
 
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important; }
@@ -6290,6 +6290,19 @@ a.text-dark:hover, a.text-dark:focus {
     .list-group > .list-group-item a:hover {
       text-decoration: none; }
 
-.tasks-list > .list-group-item {
+.groups-list > li {
+  background: url("../images/group-item.svg") no-repeat 8px center; }
+  .groups-list > li + li {
+    border-top: none; }
+
+.tasks-list > li {
   padding-top: 1.5rem;
-  padding-bottom: 1.5rem; }
+  padding-bottom: 1.5rem;
+  background: url("../images/incomplete.svg") no-repeat 8px center; }
+  .tasks-list > li.completed {
+    background: url("../images/completed.svg") no-repeat 8px center;
+    text-decoration: line-through; }
+  .tasks-list > li.locked {
+    background: url("../images/locked.svg") no-repeat 8px center;
+    color: #adb5bd;
+    cursor: not-allowed; }
