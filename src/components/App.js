@@ -5,8 +5,16 @@ import tasksRepository from '../repositories/tasks-repository';
 class App extends React.Component {
   render() {
     return (
-      <div className="grouped-task-list-app">
-        <TaskGroups groups={tasksRepository.listGroups()} />
+      <div className="container grouped-task-list-app">
+        <div className="row">
+          <div className="col-md-6">
+            <h2>Things to do</h2>
+            <br/>
+            <TaskGroups groups={tasksRepository.listGroups()} />
+          </div>
+          <div className="col-md-6">
+          </div>
+        </div>
       </div>
     );
   }

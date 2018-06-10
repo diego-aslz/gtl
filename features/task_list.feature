@@ -8,9 +8,9 @@ Feature: Task List
       | 3  | Build Airplane | Hammer nails into wood | 2,3,4         |             |
     When I visit Grouped Task List system
     Then I should see the following groups:
-      | group              |
-      | Build Airplane (1) |
-      | Purchases (2)      |
+      | group          | subtitle               |
+      | Build Airplane | 0 of 1 tasks completed |
+      | Purchases      | 0 of 2 tasks completed |
 
   Scenario: Listing group tasks
     Given I have the following tasks:

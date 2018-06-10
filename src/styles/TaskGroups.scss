@@ -1,0 +1,16 @@
+$list-group-border-radius: 0;
+
+@import "bootstrap/scss/bootstrap";
+
+.list-group > .list-group-item {
+  border-left: none;
+  border-right: none;
+
+  a {
+    color: $gray-900;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

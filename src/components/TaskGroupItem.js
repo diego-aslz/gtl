@@ -20,9 +20,13 @@ class TaskGroupItem extends React.Component {
 
   render() {
     return (
-      <li>
+      <li className="list-group-item">
         <a href="#" onClick={(ev) => this.toggle(ev)}>
-          {this.props.group.name} ({this.props.group.tasks.length})
+          <b>{this.props.group.name}</b>
+          <br/>
+          <span className="text-muted text-uppercase">
+            0 of {this.props.group.tasks.length} tasks completed
+          </span>
         </a>
 
         {this.state.expanded && this.renderTasks(this.props.group.tasks)}

@@ -3,5 +3,6 @@
     "env",
     "stage-3",
     "react"
-  ]
+  ],
+  "plugins": ["css-modules-transform"]
 }

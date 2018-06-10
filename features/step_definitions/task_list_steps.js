@@ -22,9 +22,11 @@ When('I expand group {string}', function (name) {
 });
 
 Then('I should see the following groups:', function (dataTable) {
-  const actual = app.find('.task-groups').children().map(el => el.text());
-  const expected = dataTable.rows().map(row => row[0]);
-  expect(actual).to.be.eql(expected);
+  const actual = app.find('.task-groups li a').map(el => ({
+    group: el.children().first().text(),
+    subtitle: el.children().last().text(),
+  }));
+  expect(actual).to.be.eql(dataTable.hashes());
 });
 
 Then('I should see the following tasks:', function (dataTable) {

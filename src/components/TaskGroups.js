@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskGroupItem from './TaskGroupItem';
+import '../styles/TaskGroups.css';
 
 function TaskGroups(props) {
   const groups = props.groups.map(group => (
@@ -7,7 +8,7 @@ function TaskGroups(props) {
   ));
 
   return (
-    <ul className="task-groups">{groups}</ul>
+    <ul className="task-groups list-group">{groups}</ul>
   );
 }
 
