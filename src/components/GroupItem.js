@@ -6,14 +6,20 @@ class GroupItem extends React.Component {
     this.props.onClick(this.props.group);
   }
 
+  countCompleted(tasks) {
+    return tasks.reduce((acc, t) => acc + (t.completedAt ? 1 : 0), 0);
+  }
+
   render() {
+    const { group } = this.props;
+
     return (
       <li className="list-group-item">
         <a href="#" onClick={(ev) => this.onClick(ev)}>
-          <b>{this.props.group.name}</b>
+          <b>{group.name}</b>
           <br/>
           <span className="text-muted text-uppercase">
-            0 of {this.props.group.tasks.length} tasks completed
+            {this.countCompleted(group.tasks)} of {group.tasks.length} tasks completed
           </span>
         </a>
       </li>
