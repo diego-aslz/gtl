@@ -67,3 +67,14 @@ Feature: Task List
       | id | group     | task           | dependencyIds | completedAt |
       | 1  | Purchases | Go to the bank |               |             |
       | 2  | Purchases | Buy hammer     | 1             |             |
+
+  Scenario: Non-existent dependencies should be ignored
+    Given I have the following tasks:
+      | id | group     | task           | dependencyIds | completedAt |
+      | 1  | Purchases | Go to the bank | 2             |             |
+    And I visit Grouped Task List system
+    And I open group "Purchases"
+    When I mark task "Go to the bank" as completed
+    Then I should see the following tasks:
+      | task           | status    |
+      | Go to the bank | completed |
