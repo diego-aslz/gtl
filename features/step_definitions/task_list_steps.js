@@ -14,10 +14,7 @@ Before(function() {
 });
 
 Given('I have the following tasks:', function (dataTable) {
-  tasksRepository.addTasks(dataTable.hashes().map(task => ({
-    ...task,
-    completedAt: (task.completedAt === '' ? null : new Date(task.completedAt)),
-  })));
+  tasksRepository.addTasks(mapTasks(dataTable.hashes()));
 });
 
 When('I visit Grouped Task List system', function () {
@@ -42,7 +39,7 @@ Then('I should see the following groups:', function (dataTable) {
 
 Then('I should see the following tasks:', function (dataTable) {
   function getStatus(el) {
-    return ['completed'].find(status => el.hasClass(status)) || 'incomplete';
+    return ['locked', 'completed'].find(status => el.hasClass(status)) || 'incomplete';
   }
 
   const actual = app.find('.task-item').map(el => ({
@@ -52,6 +49,18 @@ Then('I should see the following tasks:', function (dataTable) {
 
   expect(actual).to.be.eql(dataTable.hashes());
 });
+
+Then('I should have the following tasks:', function (dataTable) {
+  expect(tasksRepository.listTasks()).to.be.eql(mapTasks(dataTable.hashes()));
+});
+
+function mapTasks(rawTasks) {
+  return rawTasks.map(task => ({
+    ...task,
+    completedAt: (task.completedAt === '' ? null : new Date(task.completedAt)),
+    dependencyIds: (task.dependencyIds === '' ? [] : task.dependencyIds.split(',')),
+  }));
+}
 
 function findItem(listSelector, name) {
   return app.find(listSelector + ' li a').filterWhere(el => el.text().indexOf(name) > -1);

@@ -3,11 +3,16 @@ import tasksRepository from '../repositories/tasks-repository';
 
 class Tasks extends React.Component {
   taskClicked(task) {
+    if (tasksRepository.anyIncomplete(task.dependencyIds)) {
+      return;
+    }
+
     if (task.completedAt) {
       tasksRepository.incompleteTask(task.id);
     } else {
       tasksRepository.completeTask(task.id);
     }
+
     this.props.taskChanged();
   }
 
@@ -22,7 +27,9 @@ class Tasks extends React.Component {
   taskItemClasses(task) {
     let classes = 'list-group-item task-item';
 
-    if (task.completedAt) {
+    if (tasksRepository.anyIncomplete(task.dependencyIds)) {
+      classes += ' locked';
+    } else if (task.completedAt) {
       classes += ' completed';
     }
 

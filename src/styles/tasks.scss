@@ -10,7 +10,10 @@
 
   &.locked {
     background: url('../images/locked.svg') no-repeat 8px center;
-    color: $text-muted;
-    cursor: not-allowed;
+
+    a, a:hover {
+      color: $text-muted;
+      cursor: not-allowed;
+    }
   }
 }

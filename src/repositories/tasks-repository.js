@@ -50,6 +50,10 @@ const tasksRepository = {
     if (task) {
       callbackFn(task);
     }
+  },
+
+  anyIncomplete(ids) {
+    return allTasks.some(task => ids.indexOf(task.id) > -1 && !task.completedAt);
   }
 };
 

@@ -23,13 +23,14 @@ Feature: Task List
     Then I should see the following tasks:
       | task           | status     |
       | Go to the bank | incomplete |
-      | Buy hammer     | incomplete |
+      | Buy hammer     | locked     |
 
   Scenario: Completing a task
     Given I have the following tasks:
       | id | group     | task           | dependencyIds | completedAt |
       | 1  | Purchases | Go to the bank |               |             |
       | 2  | Purchases | Buy hammer     | 1             |             |
+      | 3  | Purchases | Buy paint      | 2             |             |
     And I visit Grouped Task List system
     And I expand group "Purchases"
     When I mark task "Go to the bank" as completed
@@ -37,16 +38,32 @@ Feature: Task List
       | task           | status     |
       | Go to the bank | completed  |
       | Buy hammer     | incomplete |
+      | Buy paint      | locked     |
 
   Scenario: Marking a completed task as incomplete
     Given I have the following tasks:
       | id | group     | task           | dependencyIds | completedAt          |
       | 1  | Purchases | Go to the bank |               | 2018-06-10 10:00:00Z |
-      | 2  | Purchases | Buy hammer     |               | 2018-06-10 10:00:00Z |
+      | 2  | Purchases | Buy hammer     | 1             | 2018-06-10 10:00:00Z |
+      | 3  | Purchases | Buy paint      | 2             |                      |
     And I visit Grouped Task List system
     And I expand group "Purchases"
-    When I mark task "Go to the bank" as incomplete
+    When I mark task "Buy hammer" as incomplete
     Then I should see the following tasks:
       | task           | status     |
-      | Go to the bank | incomplete |
-      | Buy hammer     | completed  |
+      | Go to the bank | completed  |
+      | Buy hammer     | incomplete |
+      | Buy paint      | locked     |
+
+  Scenario: Trying to complete a locked task
+    Given I have the following tasks:
+      | id | group     | task           | dependencyIds | completedAt |
+      | 1  | Purchases | Go to the bank |               |             |
+      | 2  | Purchases | Buy hammer     | 1             |             |
+    And I visit Grouped Task List system
+    And I expand group "Purchases"
+    When I mark task "Buy hammer" as completed
+    Then I should have the following tasks:
+      | id | group     | task           | dependencyIds | completedAt |
+      | 1  | Purchases | Go to the bank |               |             |
+      | 2  | Purchases | Buy hammer     | 1             |             |
