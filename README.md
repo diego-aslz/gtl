@@ -20,19 +20,26 @@ feature scenarios are inside the `features` folder.
 
 To run the tests, simply call `yarn test` and it'll run the scenarios.
 
+## Starting the App
+
+Just call `yarn start`.
+
+## Folders Structure
+
+* `features`: here are our test files.
+* `src/components`: here we put all the app components.
+* `src/image`: images used by our stylesheets.
+* `src/repositories`: repositories and data storage related files.
+* `src/styles`: SCSS and CSS files.
+
 ## Stylesheets
 
-This project uses Sass to generate its CSS. Style files are inside
-`src/styles` and images are in `src/images`.
+This project uses Sass to generate its CSS.
 
 If you are to change any style you'll need to recompile the final CSS,
 which is stored in `src/styles/app.css`. To do that, just call
 `yarn watch-css`, which will recompile it and monitor for further changes.
 Once you're done changing styles, just hit Ctrl + C to stop watching.
-
-## Starting the App
-
-Just call `yarn start`.
 
 ## Database
 
