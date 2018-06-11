@@ -7,12 +7,13 @@
     "node-sass-chokidar": "^1.3.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cucumber-js --require-module babel-register",
+    "test": "cucumber-js -r features/support/ -r features/step_definitions --require-module babel-register",
     "eject": "react-scripts eject",
     "lint": "eslint features src",
     "build-css": "node-sass-chokidar --include-path ./node_modules --include-path ./src/styles src/styles/app.scss -o src/styles",

@@ -1,48 +1,19 @@
 import React from 'react';
 import Groups from './Groups';
-import Tasks from './Tasks';
-import tasksRepository from '../repositories/tasks-repository';
+import Group from './Group';
+import { Route } from 'react-router-dom';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      groups: tasksRepository.listGroups(),
-    };
-  }
-
-  groupSelected(group) {
-    this.setState({ group });
-  }
-
-  taskChanged() {
-    const groups = tasksRepository.listGroups();
-    let group;
-
-    if (this.state.group) {
-      group = groups.find(g => g.name === this.state.group.name);
-    }
-
-    this.setState({
-      groups,
-      group,
-    });
-  }
-
-  render() {
-    return (
-      <div className="container grouped-task-list-app">
-        <div className="row">
-          <div className="col-md-6">
-            <Groups groups={this.state.groups} onGroupSelect={group => this.groupSelected(group)} />
-          </div>
-          <div className="col-md-6">
-            <Tasks group={this.state.group} taskChanged={() => this.taskChanged()} />
-          </div>
+function App() {
+  return (
+    <div className="container grouped-task-list-app">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <Route exact path="/" component={Groups} />
+          <Route path="/groups/:name" component={Group} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;

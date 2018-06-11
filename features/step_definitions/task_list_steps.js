@@ -6,11 +6,14 @@ import App from '../../src/components/App';
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
+import { HashRouter as Router } from 'react-router-dom';
+import setupDom from '../support/jsdom';
 
 let app;
 
 Before(function() {
   tasksRepository.clear();
+  setupDom();
 });
 
 Given('I have the following tasks:', function (dataTable) {
@@ -18,15 +21,15 @@ Given('I have the following tasks:', function (dataTable) {
 });
 
 When('I visit Grouped Task List system', function () {
-  app = mount(<App />);
+  app = mount(<Router><App /></Router>);
 });
 
-When('I expand group {string}', function (name) {
-  findItem('.groups-list', name).simulate('click');
+When('I open group {string}', function (name) {
+  findItem('.groups-list', name).simulate('click', { button: 0 });
 });
 
 When('I mark task {string} as completed/incomplete', function (name) {
-  findItem('.tasks-list', name).simulate('click');
+  findItem('.tasks-list', name).simulate('click', { button: 0 });
 });
 
 Then('I should see the following groups:', function (dataTable) {

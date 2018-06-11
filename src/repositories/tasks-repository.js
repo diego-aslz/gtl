@@ -15,6 +15,10 @@ const tasksRepository = {
     return allTasks.map(task => ({ ...task }));
   },
 
+  listTasksByGroup(name) {
+    return this.listTasks().filter(task => task.group === name);
+  },
+
   listGroups() {
     const groups = [];
 

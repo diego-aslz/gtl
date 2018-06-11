@@ -1,9 +1,10 @@
 import React from 'react';
 import GroupItem from './GroupItem';
+import tasksRepository from '../repositories/tasks-repository';
 
-function Groups(props) {
-  const groups = props.groups.map(group => (
-    <GroupItem key={group.name} group={group} onClick={props.onGroupSelect} />
+function Groups() {
+  const groups = tasksRepository.listGroups().map(group => (
+    <GroupItem key={group.name} group={group} />
   ));
 
   return (

@@ -1,7 +1,17 @@
 import React from 'react';
 import tasksRepository from '../repositories/tasks-repository';
+import { Link } from 'react-router-dom';
 
-class Tasks extends React.Component {
+class Group extends React.Component {
+  constructor(props) {
+    super(props);
+    const { name } = this.props.match.params;
+    this.state = {
+      name,
+      tasks: tasksRepository.listTasksByGroup(name),
+    };
+  }
+
   taskClicked(task) {
     if (tasksRepository.anyIncomplete(task.dependencyIds)) {
       return;
@@ -13,11 +23,13 @@ class Tasks extends React.Component {
       tasksRepository.completeTask(task.id);
     }
 
-    this.props.taskChanged();
+    this.setState({
+      tasks: tasksRepository.listTasksByGroup(this.state.name),
+    });
   }
 
-  renderTasks(tasks) {
-    return tasks.map(task => (
+  renderTasks() {
+    return this.state.tasks.map(task => (
       <li key={task.id} className={this.taskItemClasses(task)}>
         <a onClick={() => this.taskClicked(task)}><b>{task.task}</b></a>
       </li>
@@ -37,20 +49,21 @@ class Tasks extends React.Component {
   }
 
   render() {
-    const { group } = this.props;
-
-    if (!group) {
-      return null;
-    }
-
     return (
       <div>
-        <h2>{group.name}</h2>
+        <div className="row">
+          <div className="col-sm-6">
+            <h2>{this.state.name}</h2>
+          </div>
+          <div className="col-sm-6 text-right all-groups-link">
+            <Link to="/">ALL GROUPS</Link>
+          </div>
+        </div>
         <br />
-        <ul className="tasks-list list-group">{this.renderTasks(group.tasks)}</ul>
+        <ul className="tasks-list list-group">{this.renderTasks()}</ul>
       </div>
     );
   }
 }
 
-export default Tasks;
+export default Group;
